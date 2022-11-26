@@ -2,14 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:sgm_du_gu_we/screens/main_screen.dart';
 
 class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
+  static const String id = 'home_screen';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: NavigationDrawer(),
+      drawer: const NavigationDrawer(),
       appBar: AppBar(
-        title: Text('Hauptmenü'),
+        title: const Text('Hauptmenü'),
       ),
-      body: Center(
+      body: const Center(
         child: Text('Hauptmenü'),
       ),
     );
@@ -34,7 +37,10 @@ class NavigationDrawer extends StatelessWidget {
 
   Widget buildHeader(BuildContext context) => Container(
         color: Colors.blue.shade700,
-        padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
+        padding: EdgeInsets.only(
+          top: 24 + MediaQuery.of(context).padding.top,
+          bottom: 24,
+        ),
         child: Column(
           children: const [
             CircleAvatar(
