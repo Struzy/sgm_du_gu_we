@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'constants.dart';
 
 class TextSubtitle extends StatelessWidget {
-  const TextSubtitle({super.key, required this.text});
+  TextSubtitle({required this.text});
 
   final String text;
 
@@ -10,7 +10,7 @@ class TextSubtitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       text,
-      style: const TextStyle(
+      style: TextStyle(
         fontFamily: kSourceSansPro,
         fontSize: kFontsizeSubtitle,
         color: Colors.black,
@@ -21,7 +21,7 @@ class TextSubtitle extends StatelessWidget {
 }
 
 class TextTitle extends StatelessWidget {
-  const TextTitle({super.key, required this.text});
+  TextTitle({required this.text});
 
   final String text;
 
@@ -29,7 +29,7 @@ class TextTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       text,
-      style: const TextStyle(
+      style: TextStyle(
         fontFamily: kPacifico,
         fontSize: kFontsizeTitle,
         color: Colors.black,
@@ -40,7 +40,7 @@ class TextTitle extends StatelessWidget {
 }
 
 class TextInButton extends StatelessWidget {
-  const TextInButton({super.key, required this.text});
+  TextInButton({required this.text});
 
   final String text;
 
@@ -48,7 +48,7 @@ class TextInButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       text,
-      style: const TextStyle(
+      style: TextStyle(
         fontFamily: kSourceSansPro,
         fontSize: kFontsizeButton,
         color: Colors.black,

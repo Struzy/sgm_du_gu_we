@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import '../button_styles.dart';
+import '../constants.dart';
 import '../screens/login_screen.dart';
 import '../screens/registration_screen.dart';
 import '../text_styles.dart';
-import '../constants.dart';
 
 class MainScreen extends StatelessWidget {
-  const MainScreen({super.key});
   static const String id = 'main_screen';
 
   @override
@@ -15,47 +15,36 @@ class MainScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
-            const Center(
+            Center(
               child: TextSubtitle(
                 text: 'Herzlich willkommen bei der',
               ),
             ),
-            const Center(
+            Center(
               child: TextTitle(
                 text: 'SGM Durchhausen/',
               ),
             ),
-            const Center(
+            Center(
               child: TextTitle(
                 text: 'Gunningen/Weigheim!',
               ),
             ),
-            const CircleAvatar(
-              radius: 100.0,
-              backgroundImage:
-                  AssetImage('images/SGM_Durchhausen_Gunningen.jpg'),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                vertical: kEdgeInset,
-              ),
-              child: Material(
-                color: kSGMColorGreen,
-                borderRadius: BorderRadius.circular(kBorderRadius),
-                elevation: kElevation,
-                child: MaterialButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, LoginScreen.id);
-                  },
-                  minWidth: kMinWidth,
-                  height: kHeight,
-                  child: TextInButton(
-                    text: 'Anmelden',
-                  ),
+            Hero(
+              tag: 'SGM_Durchhausen_Gunningen',
+              child: Container(
+                child: CircleAvatar(
+                  radius: kRadiusCircleAvatar,
+                  backgroundImage:
+                      AssetImage('images/SGM_Durchhausen_Gunningen.jpg'),
                 ),
               ),
             ),
-            const Text(
+            RoundedButton(
+              title: 'Anmelden',
+              destination: LoginScreen.id,
+            ),
+            Text(
               'Noch kein Mitglied? Jetzt registrieren!',
               style: TextStyle(
                 fontFamily: 'Source Sans Pro',
@@ -64,25 +53,9 @@ class MainScreen extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                vertical: kEdgeInset,
-              ),
-              child: Material(
-                color: kSGMColorGreen,
-                borderRadius: BorderRadius.circular(kBorderRadius),
-                elevation: kElevation,
-                child: MaterialButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, RegistrationScreen.id);
-                  },
-                  minWidth: kMinWidth,
-                  height: kHeight,
-                  child: TextInButton(
-                    text: 'Registrieren',
-                  ),
-                ),
-              ),
+            RoundedButton(
+              title: 'Registrieren',
+              destination: RegistrationScreen.id,
             ),
           ],
         ),

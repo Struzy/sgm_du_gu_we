@@ -1,17 +1,183 @@
 import 'package:flutter/material.dart';
+import '../button_styles.dart';
+import '../constants.dart';
+import '../text_styles.dart';
+import 'main_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-class RegistrationScreen extends StatelessWidget {
-  const RegistrationScreen({super.key});
+class RegistrationScreen extends StatefulWidget {
   static const String id = 'registration_screen';
+
+  @override
+  RegistrationScreenState createState() => RegistrationScreenState();
+}
+
+class RegistrationScreenState extends State<RegistrationScreen> {
+  final _auth = FirebaseAuth.instance;
+  late String email;
+  late String password;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Registrierung'),
+        backgroundColor: kSGMColorGreen,
+        title: Text('Registrierung'),
       ),
-      body: const Center(
-        child: Text('Registrierung'),
+      body: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 24.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            Hero(
+              tag: 'SGM_Durchhausen_Gunningen',
+              child: Container(
+                height: 300.0,
+                child: Image.asset('images/SGM_Durchhausen_Gunningen.jpg'),
+              ),
+            ),
+            SizedBox(
+              height: 48.0,
+            ),
+            TextField(
+              keyboardType: TextInputType.emailAddress,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: Colors.black,
+              ),
+              onChanged: (value) {
+                email = value;
+              },
+              decoration: InputDecoration(
+                filled: true,
+                fillColor: Colors.white,
+                icon: Icon(
+                  Icons.email,
+                  color: Colors.black,
+                ),
+                hintText: 'E-Mail eingeben',
+                hintStyle: TextStyle(
+                  color: Colors.grey,
+                ),
+                contentPadding:
+                    EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(32.0)),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: kSGMColorGreen, width: 3.0),
+                  borderRadius: BorderRadius.all(Radius.circular(32.0)),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide:
+                      BorderSide(color: Colors.lightBlueAccent, width: 2.0),
+                  borderRadius: BorderRadius.all(Radius.circular(32.0)),
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 8.0,
+            ),
+            TextField(
+              obscureText: true,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: Colors.black,
+              ),
+              onChanged: (value) {
+                password = value;
+              },
+              decoration: InputDecoration(
+                filled: true,
+                fillColor: Colors.white,
+                icon: Icon(
+                  Icons.password,
+                  color: Colors.black,
+                ),
+                hintText: 'Passwort eingeben',
+                hintStyle: TextStyle(
+                  color: Colors.grey,
+                ),
+                contentPadding:
+                    EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(32.0)),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: kSGMColorGreen, width: 3.0),
+                  borderRadius: BorderRadius.all(Radius.circular(32.0)),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide:
+                      BorderSide(color: Colors.lightBlueAccent, width: 2.0),
+                  borderRadius: BorderRadius.all(Radius.circular(32.0)),
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 24.0,
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(
+                vertical: kEdgeInset,
+              ),
+              child: Material(
+                color: kSGMColorGreen,
+                borderRadius: BorderRadius.circular(kBorderRadius),
+                elevation: kElevation,
+                child: MaterialButton(
+                  onPressed: () async {
+                    try {
+                      final newUser =
+                          await _auth.createUserWithEmailAndPassword(
+                              email: email, password: password);
+                      if (newUser == null) {
+                        AlertDialog(
+                          title: Text('Fehler!'),
+                          content: Text(
+                              'Der Benutzer konnte nicht erstellt werden.'),
+                          actions: <Widget>[
+                            TextButton(
+                              child: Text('OK'),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                            ),
+                          ],
+                        );
+                      }
+                      if (password.length < 6) {
+                        AlertDialog(
+                          title: Text('Fehler!'),
+                          content: Text(
+                              'Das Passwort muss mindestens 6 Zeichen lang sein.'),
+                          actions: <Widget>[
+                            TextButton(
+                              child: Text('OK'),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                            ),
+                          ],
+                        );
+                      } else {
+                        Navigator.pushNamed(context, MainScreen.id);
+                      }
+                    } catch (e) {
+                      print(e);
+                    }
+                  },
+                  minWidth: kMinWidth,
+                  height: kHeight,
+                  child: TextInButton(
+                    text: 'Registrieren',
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

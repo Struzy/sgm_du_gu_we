@@ -21,3 +21,6 @@ const double kBorderRadius = 30.0;
 const double kElevation = 10.0;
 const double kMinWidth = 300.0;
 const double kHeight = 42.0;
+
+// Radius of circular avatars
+const double kRadiusCircleAvatar = 100.0;
