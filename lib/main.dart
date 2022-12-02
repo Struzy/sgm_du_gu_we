@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:sgm_du_gu_we/screens/email_verification_screen.dart';
 import 'constants.dart';
 import 'screens/main_screen.dart';
 import 'screens/registration_screen.dart';
@@ -32,6 +33,7 @@ class SGMDuGuWe extends StatelessWidget {
       routes: {
         MainScreen.id: (context) => MainScreen(),
         RegistrationScreen.id: (context) => RegistrationScreen(),
+        EmailVerificationScreen.id: (context) => EmailVerificationScreen(),
         LoginScreen.id: (context) => LoginScreen(),
         HomeScreen.id: (context) => HomeScreen(),
       },

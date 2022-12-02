@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sgm_du_gu_we/screens/email_verification_screen.dart';
 import '../button_styles.dart';
 import '../constants.dart';
 import '../text_styles.dart';
@@ -133,39 +134,54 @@ class RegistrationScreenState extends State<RegistrationScreen> {
                           await _auth.createUserWithEmailAndPassword(
                               email: email, password: password);
                       if (newUser == null) {
-                        AlertDialog(
-                          title: Text('Fehler!'),
-                          content: Text(
-                              'Der Benutzer konnte nicht erstellt werden.'),
-                          actions: <Widget>[
-                            TextButton(
-                              child: Text('OK'),
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                              },
-                            ),
-                          ],
+                        showDialog<String>(
+                          context: context,
+                          builder: (BuildContext context) => AlertDialog(
+                            title: const Text('Fehler!'),
+                            content: const Text(
+                                'Das Konto konnte nicht erstellt werden.'),
+                            actions: <Widget>[
+                              TextButton(
+                                onPressed: () => Navigator.pop(context, 'OK'),
+                                child: const Text('OK'),
+                              ),
+                            ],
+                          ),
                         );
                       }
                       if (password.length < 6) {
-                        AlertDialog(
-                          title: Text('Fehler!'),
-                          content: Text(
-                              'Das Passwort muss mindestens 6 Zeichen lang sein.'),
-                          actions: <Widget>[
-                            TextButton(
-                              child: Text('OK'),
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                              },
-                            ),
-                          ],
+                        showDialog<String>(
+                          context: context,
+                          builder: (BuildContext context) => AlertDialog(
+                            title: const Text('Fehler!'),
+                            content: const Text(
+                                'Das Passwort muss mindestens 6 Zeichen lang sein.'),
+                            actions: <Widget>[
+                              TextButton(
+                                onPressed: () => Navigator.pop(context, 'OK'),
+                                child: const Text('OK'),
+                              ),
+                            ],
+                          ),
                         );
                       } else {
-                        Navigator.pushNamed(context, MainScreen.id);
+                        Navigator.pushNamed(
+                            context, EmailVerificationScreen.id);
                       }
                     } catch (e) {
-                      print(e);
+                      showDialog<String>(
+                        context: context,
+                        builder: (BuildContext context) => AlertDialog(
+                          title: const Text('Fehler!'),
+                          content: Text(e.toString()),
+                          actions: <Widget>[
+                            TextButton(
+                              onPressed: () => Navigator.pop(context, 'OK'),
+                              child: const Text('OK'),
+                            ),
+                          ],
+                        ),
+                      );
                     }
                   },
                   minWidth: kMinWidth,
