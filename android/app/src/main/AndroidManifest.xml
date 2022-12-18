@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.sgm_du_gu_we.sgm_du_gu_we">
    <application
-        android:label="sgm_du_gu_we"
+        android:label="SGMDuGuWe"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
