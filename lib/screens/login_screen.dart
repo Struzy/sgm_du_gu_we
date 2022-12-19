@@ -1,6 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import '../authentication_service.dart';
 import '../button_styles.dart';
 import '../constants.dart';
+import '../text_styles.dart';
 import 'home_screen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -11,6 +14,9 @@ class LoginScreen extends StatefulWidget {
 }
 
 class LoginScreenState extends State<LoginScreen> {
+  String email = '';
+  String password = '';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,8 +70,7 @@ class LoginScreenState extends State<LoginScreen> {
                   borderRadius: BorderRadius.all(Radius.circular(32.0)),
                 ),
                 focusedBorder: OutlineInputBorder(
-                  borderSide:
-                      BorderSide(color: Colors.lightBlueAccent, width: 2.0),
+                  borderSide: BorderSide(color: kSGMColorGreen, width: 2.0),
                   borderRadius: BorderRadius.all(Radius.circular(32.0)),
                 ),
               ),
@@ -103,8 +108,7 @@ class LoginScreenState extends State<LoginScreen> {
                   borderRadius: BorderRadius.all(Radius.circular(32.0)),
                 ),
                 focusedBorder: OutlineInputBorder(
-                  borderSide:
-                      BorderSide(color: Colors.lightBlueAccent, width: 2.0),
+                  borderSide: BorderSide(color: kSGMColorGreen, width: 2.0),
                   borderRadius: BorderRadius.all(Radius.circular(32.0)),
                 ),
               ),
@@ -112,9 +116,34 @@ class LoginScreenState extends State<LoginScreen> {
             SizedBox(
               height: 24.0,
             ),
-            RoundedButton(
-              title: 'Anmelden',
-              destination: HomeScreen.id,
+            Padding(
+              padding: EdgeInsets.symmetric(
+                vertical: kEdgeInset,
+              ),
+              child: Material(
+                color: kSGMColorGreen,
+                borderRadius: BorderRadius.circular(kBorderRadius),
+                elevation: kElevation,
+                child: MaterialButton(
+                  onPressed: () async {
+                    await AuthenticationService.signIn(
+                        userEmail: email, password: password, context: context);
+                    if (FirebaseAuth.instance.currentUser != null) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (ctx) => HomeScreen(),
+                        ),
+                      );
+                    }
+                  },
+                  minWidth: kMinWidth,
+                  height: kHeight,
+                  child: TextInButton(
+                    text: 'Anmelden',
+                  ),
+                ),
+              ),
             ),
           ],
         ),

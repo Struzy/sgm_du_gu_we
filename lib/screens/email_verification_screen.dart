@@ -2,7 +2,9 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:sgm_du_gu_we/screens/registration_screen.dart';
-
+import '../authentication_service.dart';
+import '../constants.dart';
+import '../text_styles.dart';
 import 'main_screen.dart';
 
 class EmailVerificationScreen extends StatefulWidget {
@@ -51,10 +53,9 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
     });
 
     if (isEmailVerified) {
-      // TODO: implement your code after email verification
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text("Email erfoglreich verifiziert"),
+          content: Text("Email erfolgreich verifiziert"),
         ),
       );
 
@@ -85,6 +86,12 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
                 child: Text(
                   'Überprüfen Sie Ihre Email',
                   textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontFamily: 'Source Sans Pro',
+                    fontSize: 14.0,
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
               const SizedBox(height: 8),
@@ -94,11 +101,22 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
                   child: Text(
                     'Eine Email wurde an ${_auth.currentUser?.email} gesendet',
                     textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontFamily: 'Source Sans Pro',
+                      fontSize: 14.0,
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
               ),
               const SizedBox(height: 16),
-              const Center(child: CircularProgressIndicator()),
+              const Center(
+                child: CircularProgressIndicator(
+                  backgroundColor: kSGMColorRed,
+                  color: kSGMColorGreen,
+                ),
+              ),
               const SizedBox(height: 8),
               const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 32.0),
@@ -106,13 +124,51 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
                   child: Text(
                     'Email verifizieren...',
                     textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontFamily: 'Source Sans Pro',
+                      fontSize: 14.0,
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
               ),
               const SizedBox(height: 57),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 32.0),
-                child: ElevatedButton(
+                child: Material(
+                  color: kSGMColorGreen,
+                  borderRadius: BorderRadius.circular(kBorderRadius),
+                  elevation: kElevation,
+                  child: MaterialButton(
+                    onPressed: () {
+                      try {
+                        _auth.currentUser?.sendEmailVerification();
+                      } catch (e) {
+                        showDialog<String>(
+                          context: context,
+                          builder: (BuildContext context) => AlertDialog(
+                            title: const Text('Fehler!'),
+                            content: Text(e.toString()),
+                            actions: <Widget>[
+                              TextButton(
+                                onPressed: () => Navigator.pop(context, 'OK'),
+                                child: const Text('OK'),
+                              ),
+                            ],
+                          ),
+                        );
+                      }
+                    },
+                    minWidth: kMinWidth,
+                    height: kHeight,
+                    child: TextInButton(
+                      text: 'Erneut senden',
+                    ),
+                  ),
+                ),
+
+                /*ElevatedButton(
                   child: const Text('Erneut senden'),
                   onPressed: () {
                     try {
@@ -133,7 +189,7 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
                       );
                     }
                   },
-                ),
+                ),*/
               ),
             ],
           ),

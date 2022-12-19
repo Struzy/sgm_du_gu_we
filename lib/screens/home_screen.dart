@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:sgm_du_gu_we/authentication_service.dart';
+import 'package:sgm_du_gu_we/screens/main_screen.dart';
+import 'package:sgm_du_gu_we/text_styles.dart';
 
 class HomeScreen extends StatelessWidget {
   static const String id = 'home_screen';
@@ -98,10 +101,17 @@ class NavigationDrawer extends StatelessWidget {
         ),
         ListTile(
           leading: Icon(Icons.logout),
-          title: Text('Logout'),
+          title: TextBurgerMenu(
+            text: 'Abmelden',
+          ),
           onTap: () {
-            // TODO
-            Navigator.pop(context);
+            AuthenticationService.signOut(context: context);
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text('Erfolgreich ausgeloggt'),
+              ),
+            );
+            Navigator.pushNamed(context, MainScreen.id);
           },
         ),
       ]);

@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:sgm_du_gu_we/authentication_service.dart';
 import 'package:sgm_du_gu_we/screens/email_verification_screen.dart';
-import '../button_styles.dart';
 import '../constants.dart';
 import '../text_styles.dart';
-import 'main_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class RegistrationScreen extends StatefulWidget {
+  const RegistrationScreen({Key? key}) : super(key: key);
+
   static const String id = 'registration_screen';
 
   @override
@@ -14,9 +15,9 @@ class RegistrationScreen extends StatefulWidget {
 }
 
 class RegistrationScreenState extends State<RegistrationScreen> {
-  final _auth = FirebaseAuth.instance;
-  late String email;
-  late String password;
+  String email = '';
+  String password = '';
+  bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -64,16 +65,21 @@ class RegistrationScreenState extends State<RegistrationScreen> {
                 contentPadding:
                     EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
                 border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(32.0)),
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(32.0),
+                  ),
                 ),
                 enabledBorder: OutlineInputBorder(
                   borderSide: BorderSide(color: kSGMColorGreen, width: 3.0),
-                  borderRadius: BorderRadius.all(Radius.circular(32.0)),
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(32.0),
+                  ),
                 ),
                 focusedBorder: OutlineInputBorder(
-                  borderSide:
-                      BorderSide(color: Colors.lightBlueAccent, width: 2.0),
-                  borderRadius: BorderRadius.all(Radius.circular(32.0)),
+                  borderSide: BorderSide(color: kSGMColorGreen, width: 2.0),
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(32.0),
+                  ),
                 ),
               ),
             ),
@@ -103,16 +109,21 @@ class RegistrationScreenState extends State<RegistrationScreen> {
                 contentPadding:
                     EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
                 border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(32.0)),
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(32.0),
+                  ),
                 ),
                 enabledBorder: OutlineInputBorder(
                   borderSide: BorderSide(color: kSGMColorGreen, width: 3.0),
-                  borderRadius: BorderRadius.all(Radius.circular(32.0)),
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(32.0),
+                  ),
                 ),
                 focusedBorder: OutlineInputBorder(
-                  borderSide:
-                      BorderSide(color: Colors.lightBlueAccent, width: 2.0),
-                  borderRadius: BorderRadius.all(Radius.circular(32.0)),
+                  borderSide: BorderSide(color: kSGMColorGreen, width: 2.0),
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(32.0),
+                  ),
                 ),
               ),
             ),
@@ -129,6 +140,39 @@ class RegistrationScreenState extends State<RegistrationScreen> {
                 elevation: kElevation,
                 child: MaterialButton(
                   onPressed: () async {
+                    setState(() {
+                      isLoading = true;
+                    });
+                    await AuthenticationService.signUp(
+                        userEmail: email, password: password, context: context);
+                    if (FirebaseAuth.instance.currentUser != null) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (ctx) => EmailVerificationScreen(),
+                        ),
+                      );
+                    }
+                    setState(() {
+                      isLoading = false;
+                    });
+                  },
+                  minWidth: kMinWidth,
+                  height: kHeight,
+                  child: TextInButton(
+                    text: 'Registrieren',
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+/*
                     try {
                       final newUser =
                           await _auth.createUserWithEmailAndPassword(
@@ -166,7 +210,9 @@ class RegistrationScreenState extends State<RegistrationScreen> {
                         );
                       } else {
                         Navigator.pushNamed(
-                            context, EmailVerificationScreen.id);
+                          context,
+                          EmailVerificationScreen.id,
+                        );
                       }
                     } catch (e) {
                       showDialog<String>(
@@ -182,19 +228,4 @@ class RegistrationScreenState extends State<RegistrationScreen> {
                           ],
                         ),
                       );
-                    }
-                  },
-                  minWidth: kMinWidth,
-                  height: kHeight,
-                  child: TextInButton(
-                    text: 'Registrieren',
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
+                    }*/

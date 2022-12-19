@@ -10,6 +10,7 @@ const Color kSGMColorRed = Color(0xFFEA343A);
 const double kFontsizeSubtitle = 20.0;
 const double kFontsizeTitle = 40.0;
 const double kFontsizeButton = 18.0;
+const double kFontsizeBurgerMenu = 12.0;
 
 // Font families
 const String kPacifico = 'Pacifico';

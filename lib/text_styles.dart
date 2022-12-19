@@ -57,3 +57,22 @@ class TextInButton extends StatelessWidget {
     );
   }
 }
+
+class TextBurgerMenu extends StatelessWidget {
+  TextBurgerMenu({required this.text});
+
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      text,
+      style: TextStyle(
+        fontFamily: kPacifico,
+        fontSize: kFontsizeBurgerMenu,
+        color: Colors.black,
+        fontWeight: FontWeight.bold,
+      ),
+    );
+  }
+}
