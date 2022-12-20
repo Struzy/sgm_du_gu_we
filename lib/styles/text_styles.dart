@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'constants.dart';
+import '../constants.dart';
 
 class TextSubtitle extends StatelessWidget {
   TextSubtitle({required this.text});
@@ -68,7 +68,7 @@ class TextBurgerMenu extends StatelessWidget {
     return Text(
       text,
       style: TextStyle(
-        fontFamily: kPacifico,
+        fontFamily: kSourceSansPro,
         fontSize: kFontsizeBurgerMenu,
         color: Colors.black,
         fontWeight: FontWeight.bold,

@@ -2,9 +2,9 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:sgm_du_gu_we/screens/registration_screen.dart';
-import '../authentication_service.dart';
+import '../services/authentication_service.dart';
 import '../constants.dart';
-import '../text_styles.dart';
+import '../styles/text_styles.dart';
 import 'main_screen.dart';
 
 class EmailVerificationScreen extends StatefulWidget {
@@ -16,9 +16,9 @@ class EmailVerificationScreen extends StatefulWidget {
 }
 
 class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
-  bool isEmailVerified = false;
   Timer? timer;
   final _auth = FirebaseAuth.instance;
+  bool isEmailVerified = false;
 
   @override
   void initState() {
@@ -58,9 +58,7 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
           content: Text("Email erfolgreich verifiziert"),
         ),
       );
-
       timer?.cancel();
-
       Navigator.pushNamed(context, MainScreen.id);
     }
   }
@@ -134,62 +132,73 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
                 ),
               ),
               const SizedBox(height: 57),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 32.0),
-                child: Material(
-                  color: kSGMColorGreen,
-                  borderRadius: BorderRadius.circular(kBorderRadius),
-                  elevation: kElevation,
-                  child: MaterialButton(
-                    onPressed: () {
-                      try {
-                        _auth.currentUser?.sendEmailVerification();
-                      } catch (e) {
-                        showDialog<String>(
-                          context: context,
-                          builder: (BuildContext context) => AlertDialog(
-                            title: const Text('Fehler!'),
-                            content: Text(e.toString()),
-                            actions: <Widget>[
-                              TextButton(
-                                onPressed: () => Navigator.pop(context, 'OK'),
-                                child: const Text('OK'),
-                              ),
-                            ],
-                          ),
-                        );
-                      }
-                    },
-                    minWidth: kMinWidth,
-                    height: kHeight,
-                    child: TextInButton(
-                      text: 'Erneut senden',
+              Column(
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 32.0),
+                    child: ElevatedButton.icon(
+                      style: ElevatedButton.styleFrom(
+                        minimumSize: Size.fromHeight(50.0),
+                        backgroundColor: kSGMColorGreen,
+                        foregroundColor: Colors.black,
+                      ),
+                      icon: Icon(
+                        Icons.email,
+                        size: 24.0,
+                      ),
+                      label: Text(
+                        'Erneut senden',
+                        style: TextStyle(
+                          fontFamily: kSourceSansPro,
+                          fontSize: kFontsizeButton,
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      onPressed: () {
+                        try {
+                          _auth.currentUser?.sendEmailVerification();
+                        } catch (e) {
+                          showDialog<String>(
+                            context: context,
+                            builder: (BuildContext context) => AlertDialog(
+                              title: const Text('Fehler!'),
+                              content: Text(e.toString()),
+                              actions: <Widget>[
+                                TextButton(
+                                  onPressed: () => Navigator.pop(context, 'OK'),
+                                  child: const Text('OK'),
+                                ),
+                              ],
+                            ),
+                          );
+                        }
+                      },
                     ),
                   ),
-                ),
-
-                /*ElevatedButton(
-                  child: const Text('Erneut senden'),
-                  onPressed: () {
-                    try {
-                      _auth.currentUser?.sendEmailVerification();
-                    } catch (e) {
-                      showDialog<String>(
-                        context: context,
-                        builder: (BuildContext context) => AlertDialog(
-                          title: const Text('Fehler!'),
-                          content: Text(e.toString()),
-                          actions: <Widget>[
-                            TextButton(
-                              onPressed: () => Navigator.pop(context, 'OK'),
-                              child: const Text('OK'),
-                            ),
-                          ],
-                        ),
+                  const SizedBox(height: 8),
+                  TextButton(
+                    style: ElevatedButton.styleFrom(
+                      minimumSize: Size.fromHeight(50.0),
+                    ),
+                    child: Text(
+                      'Abbrechen',
+                      style: TextStyle(
+                        fontFamily: kSourceSansPro,
+                        fontSize: kFontsizeButton,
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    onPressed: () {
+                      AuthenticationService.signOut(context: context);
+                      Navigator.pushNamed(
+                        context,
+                        MainScreen.id,
                       );
-                    }
-                  },
-                ),*/
+                    },
+                  )
+                ],
               ),
             ],
           ),

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:sgm_du_gu_we/authentication_service.dart';
+import 'package:sgm_du_gu_we/constants.dart';
+import 'package:sgm_du_gu_we/services/authentication_service.dart';
 import 'package:sgm_du_gu_we/screens/main_screen.dart';
-import 'package:sgm_du_gu_we/text_styles.dart';
+import 'package:sgm_du_gu_we/styles/text_styles.dart';
 
 class HomeScreen extends StatelessWidget {
   static const String id = 'home_screen';
@@ -28,6 +29,7 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       drawer: NavigationDrawer(),
       appBar: AppBar(
+        backgroundColor: kSGMColorGreen,
         title: Text('Hauptmenü'),
       ),
       body: Center(
@@ -52,7 +54,7 @@ class NavigationDrawer extends StatelessWidget {
       );
 
   Widget buildHeader(BuildContext context) => Container(
-        color: Colors.blue.shade700,
+        color: kSGMColorGreen,
         padding: EdgeInsets.only(
           top: 24 + MediaQuery.of(context).padding.top,
           bottom: 24,
@@ -82,17 +84,37 @@ class NavigationDrawer extends StatelessWidget {
   Widget buildMenuItems(BuildContext context) => Column(children: [
         ListTile(
           leading: Icon(Icons.home),
-          title: Text('Hauptmenü'),
+          title: TextBurgerMenu(
+            text: 'Hauptmenü',
+          ),
           onTap: () {
-            Navigator.pushNamed(context, '/');
+            Navigator.pop(context);
+          },
+        ),
+        ListTile(
+          leading: Icon(Icons.library_music),
+          title: TextBurgerMenu(
+            text: 'Mediathek',
+          ),
+          onTap: () {
+            Navigator.pop(context);
+          },
+        ),
+        ListTile(
+          leading: Icon(Icons.video_collection),
+          title: TextBurgerMenu(
+            text: 'Videothek',
+          ),
+          onTap: () {
             Navigator.pop(context);
           },
         ),
         ListTile(
           leading: Icon(Icons.image),
-          title: Text('Galerie'),
+          title: TextBurgerMenu(
+            text: 'Galerie',
+          ),
           onTap: () {
-            // TODO
             Navigator.pop(context);
           },
         ),
@@ -106,12 +128,12 @@ class NavigationDrawer extends StatelessWidget {
           ),
           onTap: () {
             AuthenticationService.signOut(context: context);
+            Navigator.pushNamed(context, MainScreen.id);
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
-                content: Text('Erfolgreich ausgeloggt'),
+                content: Text('Erfolgreich abgemeldet'),
               ),
             );
-            Navigator.pushNamed(context, MainScreen.id);
           },
         ),
       ]);

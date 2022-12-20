@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:sgm_du_gu_we/text_styles.dart';
-import 'constants.dart';
+import 'package:sgm_du_gu_we/styles/text_styles.dart';
+import '../constants.dart';
 
 class RoundedButton extends StatelessWidget {
   RoundedButton({required this.title, required this.destination});
