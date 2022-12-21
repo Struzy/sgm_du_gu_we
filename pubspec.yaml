@@ -31,6 +31,8 @@ environment:
 dependencies:
   lottie: ^2.1.0
   modal_progress_hud_nsn: ^0.3.0
+  http: ^0.13.5
+  html: ^0.15.1
   flutter:
     sdk: flutter
 

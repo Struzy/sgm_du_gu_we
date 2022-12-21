@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:sgm_du_gu_we/constants.dart';
+import 'package:sgm_du_gu_we/screens/first_squad_screen.dart';
 import 'package:sgm_du_gu_we/services/authentication_service.dart';
 import 'package:sgm_du_gu_we/screens/main_screen.dart';
 import 'package:sgm_du_gu_we/styles/text_styles.dart';
@@ -8,32 +8,82 @@ import 'package:sgm_du_gu_we/styles/text_styles.dart';
 class HomeScreen extends StatelessWidget {
   static const String id = 'home_screen';
 
-  /*final _auth = FirebaseAuth.instance;
-  FirebaseUser loggedInUser;
-
-  init
-
-  void getCurrentUser() async {
-    try {
-      final user = await _auth.currentUser!;
-      if (user != null) {
-        loggedInUser = user;
-      }
-    } catch (e) {
-      print(e);
-    }
-  }*/
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: NavigationDrawer(),
       appBar: AppBar(
         backgroundColor: kSGMColorGreen,
-        title: Text('Hauptmenü'),
+        title: const Text('Hauptmenü'),
       ),
-      body: Center(
-        child: Text('Hauptmenü'),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(
+          vertical: 20.0,
+        ),
+        child: SafeArea(
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                Center(
+                  child: TextSubtitle(
+                    text: 'Herzlich willkommen bei der',
+                  ),
+                ),
+                Center(
+                  child: TextTitle(
+                    text: 'SGM Durchhausen/',
+                  ),
+                ),
+                Center(
+                  child: TextTitle(
+                    text: 'Gunningen/Weigheim!',
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(
+                    top: 20.0,
+                  ),
+                  child: Center(
+                    child: TextSubtitle(
+                      text: 'Durchhausen/Gunningen:',
+                    ),
+                  ),
+                ),
+                const Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 50.0,
+                  ),
+                  child: Image(
+                    image: NetworkImage(
+                      'https://images.media.fussball.de/userfiles/n/E/W/anvdDGNaRVzrCCDy2r5T70_t3.jpg',
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(
+                    top: 10.0,
+                  ),
+                  child: Center(
+                    child: TextSubtitle(
+                      text: 'Weigheim:',
+                    ),
+                  ),
+                ),
+                const Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 50.0,
+                  ),
+                  child: Image(
+                    image: NetworkImage(
+                      'https://images.media.fussball.de/userfiles/w/e/K/sVNqBzZhx5ySXy1Fjc9i10_t3.jpg',
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }
@@ -60,7 +110,7 @@ class NavigationDrawer extends StatelessWidget {
           bottom: 24,
         ),
         child: Column(
-          children: [
+          children: const [
             CircleAvatar(
               radius: 52,
               backgroundImage: NetworkImage(
@@ -83,16 +133,42 @@ class NavigationDrawer extends StatelessWidget {
 
   Widget buildMenuItems(BuildContext context) => Column(children: [
         ListTile(
-          leading: Icon(Icons.home),
+          leading: const Icon(Icons.home),
           title: TextBurgerMenu(
             text: 'Hauptmenü',
           ),
           onTap: () {
             Navigator.pop(context);
+            Navigator.pushNamed(context, HomeScreen.id);
+          },
+        ),
+        const Divider(
+          color: Colors.black54,
+        ),
+        ListTile(
+          leading: const Icon(Icons.person),
+          title: TextBurgerMenu(
+            text: 'Kader 1. Mannschaft',
+          ),
+          onTap: () {
+            Navigator.pop(context);
+            Navigator.pushNamed(context, FirstSquadScreen.id);
           },
         ),
         ListTile(
-          leading: Icon(Icons.library_music),
+          leading: const Icon(Icons.person),
+          title: TextBurgerMenu(
+            text: 'Kader 2. Mannschaft',
+          ),
+          onTap: () {
+            Navigator.pop(context);
+          },
+        ),
+        const Divider(
+          color: Colors.black54,
+        ),
+        ListTile(
+          leading: const Icon(Icons.library_music),
           title: TextBurgerMenu(
             text: 'Mediathek',
           ),
@@ -101,7 +177,7 @@ class NavigationDrawer extends StatelessWidget {
           },
         ),
         ListTile(
-          leading: Icon(Icons.video_collection),
+          leading: const Icon(Icons.video_collection),
           title: TextBurgerMenu(
             text: 'Videothek',
           ),
@@ -110,7 +186,7 @@ class NavigationDrawer extends StatelessWidget {
           },
         ),
         ListTile(
-          leading: Icon(Icons.image),
+          leading: const Icon(Icons.image),
           title: TextBurgerMenu(
             text: 'Galerie',
           ),
@@ -118,11 +194,35 @@ class NavigationDrawer extends StatelessWidget {
             Navigator.pop(context);
           },
         ),
-        Divider(
+        const Divider(
           color: Colors.black54,
         ),
         ListTile(
-          leading: Icon(Icons.logout),
+          leading: const Icon(Icons.euro),
+          title: TextBurgerMenu(
+            text: 'Finanzen',
+          ),
+          onTap: () {
+            Navigator.pop(context);
+          },
+        ),
+        const Divider(
+          color: Colors.black54,
+        ),
+        ListTile(
+          leading: const Icon(Icons.settings),
+          title: TextBurgerMenu(
+            text: 'Einstellungen',
+          ),
+          onTap: () {
+            Navigator.pop(context);
+          },
+        ),
+        const Divider(
+          color: Colors.black54,
+        ),
+        ListTile(
+          leading: const Icon(Icons.logout),
           title: TextBurgerMenu(
             text: 'Abmelden',
           ),
@@ -130,7 +230,7 @@ class NavigationDrawer extends StatelessWidget {
             AuthenticationService.signOut(context: context);
             Navigator.pushNamed(context, MainScreen.id);
             ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
+              const SnackBar(
                 content: Text('Erfolgreich abgemeldet'),
               ),
             );

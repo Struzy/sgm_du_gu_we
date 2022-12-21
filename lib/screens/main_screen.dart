@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import '../styles/button_styles.dart';
 import '../constants.dart';
 import '../screens/login_screen.dart';
 import '../screens/registration_screen.dart';
-import '../styles/text_styles.dart';
 
 class MainScreen extends StatelessWidget {
   static const String id = 'main_screen';
@@ -14,170 +12,163 @@ class MainScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              Center(
-                child: TextSubtitle(
-                  text: 'Herzlich willkommen bei der',
-                ),
-              ),
-              Center(
-                child: TextTitle(
-                  text: 'SGM Durchhausen/',
-                ),
-              ),
-              Center(
-                child: TextTitle(
-                  text: 'Gunningen/Weigheim!',
-                ),
-              ),
-              Hero(
-                tag: 'SGM_Durchhausen_Gunningen',
-                child: Container(
+      body: Padding(
+        padding: const EdgeInsets.symmetric(
+          vertical: 50.0,
+        ),
+        child: SafeArea(
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                const Hero(
+                  tag: 'SGM_Durchhausen_Gunningen',
                   child: CircleAvatar(
                     radius: kRadiusCircleAvatar,
                     backgroundImage:
                         AssetImage('images/SGM_Durchhausen_Gunningen.jpg'),
                   ),
                 ),
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(
-                  vertical: kEdgeInset,
-                  horizontal: 50.0,
+                Padding(
+                  padding: const EdgeInsets.only(
+                    top: 50.0,
+                    left: 50.0,
+                    right: 50.0,
+                    bottom: 8.0,
+                  ),
+                  child: ElevatedButton.icon(
+                    style: ElevatedButton.styleFrom(
+                      minimumSize: const Size.fromHeight(50.0),
+                      backgroundColor: kSGMColorGreen,
+                      foregroundColor: Colors.black,
+                    ),
+                    icon: const Icon(
+                      Icons.login,
+                      size: 24.0,
+                    ),
+                    label: const Text(
+                      'Anmelden',
+                      style: TextStyle(
+                        fontFamily: kSourceSansPro,
+                        fontSize: kFontsizeButton,
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    onPressed: () {
+                      Navigator.pushNamed(context, LoginScreen.id);
+                    },
+                  ),
                 ),
-                child: ElevatedButton.icon(
-                  style: ElevatedButton.styleFrom(
-                    minimumSize: Size.fromHeight(50.0),
-                    backgroundColor: kSGMColorGreen,
-                    foregroundColor: Colors.black,
+                const Text(
+                  'Noch kein Nutzer? Jetzt registrieren!',
+                  style: TextStyle(
+                    fontFamily: 'Source Sans Pro',
+                    fontSize: 14.0,
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
                   ),
-                  icon: Icon(
-                    Icons.login,
-                    size: 24.0,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    vertical: kEdgeInset,
+                    horizontal: 50.0,
                   ),
-                  label: Text(
-                    'Anmelden',
+                  child: ElevatedButton.icon(
+                    style: ElevatedButton.styleFrom(
+                      minimumSize: const Size.fromHeight(50.0),
+                      backgroundColor: kSGMColorGreen,
+                      foregroundColor: Colors.black,
+                    ),
+                    icon: const Icon(
+                      Icons.app_registration,
+                      size: 24.0,
+                    ),
+                    label: const Text(
+                      'Registrieren',
+                      style: TextStyle(
+                        fontFamily: kSourceSansPro,
+                        fontSize: kFontsizeButton,
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    onPressed: () {
+                      Navigator.pushNamed(context, RegistrationScreen.id);
+                    },
+                  ),
+                ),
+                const Padding(
+                  padding: EdgeInsets.all(10.0),
+                  child: Text(
+                    'Besuchen Sie uns auch auf',
                     style: TextStyle(
-                      fontFamily: kSourceSansPro,
-                      fontSize: kFontsizeButton,
+                      fontFamily: 'Source Sans Pro',
+                      fontSize: 14.0,
                       color: Colors.black,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  onPressed: () {
-                    Navigator.pushNamed(context, LoginScreen.id);
-                  },
                 ),
-              ),
-              Text(
-                'Noch kein Mitglied? Jetzt registrieren!',
-                style: TextStyle(
-                  fontFamily: 'Source Sans Pro',
-                  fontSize: 14.0,
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(
-                  vertical: kEdgeInset,
-                  horizontal: 50.0,
-                ),
-                child: ElevatedButton.icon(
-                  style: ElevatedButton.styleFrom(
-                    minimumSize: Size.fromHeight(50.0),
-                    backgroundColor: kSGMColorGreen,
-                    foregroundColor: Colors.black,
-                  ),
-                  icon: Icon(
-                    Icons.app_registration,
-                    size: 24.0,
-                  ),
-                  label: Text(
-                    'Registrieren',
-                    style: TextStyle(
-                      fontFamily: kSourceSansPro,
-                      fontSize: kFontsizeButton,
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  onPressed: () {
-                    Navigator.pushNamed(context, RegistrationScreen.id);
-                  },
-                ),
-              ),
-              Text(
-                'Besuchen Sie uns auch auf',
-                style: TextStyle(
-                  fontFamily: 'Source Sans Pro',
-                  fontSize: 14.0,
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Container(
-                    alignment: AlignmentDirectional.bottomCenter,
-                    height: 30.0,
-                    width: 30.0,
-                    child: Image(
-                      image: NetworkImage(
-                        'https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Instagram_logo_2022.svg/1024px-Instagram_logo_2022.svg.png',
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Container(
+                      alignment: AlignmentDirectional.bottomCenter,
+                      height: 30.0,
+                      width: 30.0,
+                      child: const Image(
+                        image: NetworkImage(
+                          'https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Instagram_logo_2022.svg/1024px-Instagram_logo_2022.svg.png',
+                        ),
                       ),
                     ),
-                  ),
-                  SizedBox(
-                    width: 10.0,
-                  ),
-                  Container(
-                    height: 30.0,
-                    width: 30.0,
-                    child: Image(
-                      image: NetworkImage(
-                        'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Facebook_Home_logo_old.svg/1024px-Facebook_Home_logo_old.svg.png',
+                    const SizedBox(
+                      width: 10.0,
+                    ),
+                    const SizedBox(
+                      height: 30.0,
+                      width: 30.0,
+                      child: Image(
+                        image: NetworkImage(
+                          'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Facebook_Home_logo_old.svg/1024px-Facebook_Home_logo_old.svg.png',
+                        ),
                       ),
                     ),
+                  ],
+                ),
+                const Divider(
+                  color: Colors.black54,
+                ),
+                Text(
+                  'Copyright © $month/$year',
+                  style: const TextStyle(
+                    fontFamily: 'Source Sans Pro',
+                    fontSize: 14.0,
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
                   ),
-                ],
-              ),
-              Divider(
-                color: Colors.black54,
-              ),
-              Text(
-                'Copyright © $month/$year',
-                style: TextStyle(
-                  fontFamily: 'Source Sans Pro',
-                  fontSize: 14.0,
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
                 ),
-              ),
-              Text(
-                'SGM Durchhausen/Gunningen/Weigheim',
-                style: TextStyle(
-                  fontFamily: 'Source Sans Pro',
-                  fontSize: 14.0,
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
+                const Text(
+                  'SGM Durchhausen/Gunningen/Weigheim',
+                  style: TextStyle(
+                    fontFamily: 'Source Sans Pro',
+                    fontSize: 14.0,
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-              ),
-              Text(
-                'All Rights Reserved.',
-                style: TextStyle(
-                  fontFamily: 'Source Sans Pro',
-                  fontSize: 14.0,
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
+                const Text(
+                  'All Rights Reserved.',
+                  style: TextStyle(
+                    fontFamily: 'Source Sans Pro',
+                    fontSize: 14.0,
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
