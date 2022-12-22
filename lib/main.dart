@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:sgm_du_gu_we/screens/email_verification_screen.dart';
 import 'package:sgm_du_gu_we/screens/first_squad_screen.dart';
+import 'package:sgm_du_gu_we/screens/imprint_screen.dart';
 import 'package:sgm_du_gu_we/screens/splash_screen.dart';
 import 'constants.dart';
 import 'screens/main_screen.dart';
@@ -31,7 +32,7 @@ class SGMDuGuWe extends StatelessWidget {
           bodyText1: TextStyle(color: Colors.white),
         ),
       ),
-      initialRoute: FirstSquadScreen.id,
+      initialRoute: HomeScreen.id,
       routes: {
         SplashScreen.id: (context) => SplashScreen(),
         MainScreen.id: (context) => MainScreen(),
@@ -40,6 +41,7 @@ class SGMDuGuWe extends StatelessWidget {
         LoginScreen.id: (context) => LoginScreen(),
         HomeScreen.id: (context) => HomeScreen(),
         FirstSquadScreen.id: (context) => FirstSquadScreen(),
+        ImprintScreen.id: (context) => ImprintScreen(),
       },
     );
   }

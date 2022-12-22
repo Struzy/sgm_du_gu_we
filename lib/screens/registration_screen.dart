@@ -27,6 +27,7 @@ class RegistrationScreenState extends State<RegistrationScreen> {
       appBar: AppBar(
         backgroundColor: kSGMColorGreen,
         title: Text('Registrierung'),
+        centerTitle: true,
       ),
       body: ModalProgressHUD(
         color: kSGMColorGreenLight,

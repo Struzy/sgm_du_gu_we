@@ -11,6 +11,7 @@ const double kFontsizeSubtitle = 20.0;
 const double kFontsizeTitle = 30.0;
 const double kFontsizeButton = 18.0;
 const double kFontsizeBurgerMenu = 12.0;
+const double kFontsizeText = 18.0;
 
 // Font families
 const String kPacifico = 'Pacifico';

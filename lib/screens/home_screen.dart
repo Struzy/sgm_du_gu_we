@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sgm_du_gu_we/constants.dart';
 import 'package:sgm_du_gu_we/screens/first_squad_screen.dart';
+import 'package:sgm_du_gu_we/screens/imprint_screen.dart';
 import 'package:sgm_du_gu_we/services/authentication_service.dart';
 import 'package:sgm_du_gu_we/screens/main_screen.dart';
 import 'package:sgm_du_gu_we/styles/text_styles.dart';
@@ -15,6 +16,7 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: kSGMColorGreen,
         title: const Text('Hauptmenü'),
+        centerTitle: true,
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(
@@ -142,13 +144,19 @@ class NavigationDrawer extends StatelessWidget {
             Navigator.pushNamed(context, HomeScreen.id);
           },
         ),
-        const Divider(
-          color: Colors.black54,
+        ListTile(
+          leading: const Icon(Icons.sports_soccer),
+          title: TextBurgerMenu(
+            text: 'Fußballverein',
+          ),
+          onTap: () {
+            Navigator.pop(context);
+          },
         ),
         ListTile(
           leading: const Icon(Icons.person),
           title: TextBurgerMenu(
-            text: 'Kader 1. Mannschaft',
+            text: '1. Mannschaft',
           ),
           onTap: () {
             Navigator.pop(context);
@@ -158,14 +166,101 @@ class NavigationDrawer extends StatelessWidget {
         ListTile(
           leading: const Icon(Icons.person),
           title: TextBurgerMenu(
-            text: 'Kader 2. Mannschaft',
+            text: '2. Mannschaft',
           ),
           onTap: () {
             Navigator.pop(context);
           },
         ),
-        const Divider(
-          color: Colors.black54,
+        ListTile(
+          leading: const Icon(Icons.sports),
+          title: TextBurgerMenu(
+            text: 'Kreisliga A2 Schwarzwald',
+          ),
+          onTap: () {
+            Navigator.pop(context);
+          },
+        ),
+        ListTile(
+          leading: const Icon(Icons.sports),
+          title: TextBurgerMenu(
+            text: 'Kreisliga B2 Schwarzwald',
+          ),
+          onTap: () {
+            Navigator.pop(context);
+          },
+        ),
+        ListTile(
+          leading: const Icon(Icons.sports),
+          title: TextBurgerMenu(
+            text: 'Trainingsbeteiligung',
+          ),
+          onTap: () {
+            Navigator.pop(context);
+          },
+        ),
+        ListTile(
+          leading: const Icon(Icons.sports),
+          title: TextBurgerMenu(
+            text: 'Trainingsplanung',
+          ),
+          onTap: () {
+            Navigator.pop(context);
+          },
+        ),
+        ListTile(
+          leading: const Icon(Icons.sports),
+          title: TextBurgerMenu(
+            text: 'Nominerungen',
+          ),
+          onTap: () {
+            Navigator.pop(context);
+          },
+        ),
+        ListTile(
+          leading: const Icon(Icons.sports),
+          title: TextBurgerMenu(
+            text: 'Strafen',
+          ),
+          onTap: () {
+            Navigator.pop(context);
+          },
+        ),
+        ListTile(
+          leading: const Icon(Icons.sports),
+          title: TextBurgerMenu(
+            text: 'Urlaub',
+          ),
+          onTap: () {
+            Navigator.pop(context);
+          },
+        ),
+        ListTile(
+          leading: const Icon(Icons.sports),
+          title: TextBurgerMenu(
+            text: 'Strafenkatalog',
+          ),
+          onTap: () {
+            Navigator.pop(context);
+          },
+        ),
+        ListTile(
+          leading: const Icon(Icons.sports),
+          title: TextBurgerMenu(
+            text: 'Vorbereitungsplan',
+          ),
+          onTap: () {
+            Navigator.pop(context);
+          },
+        ),
+        ListTile(
+          leading: const Icon(Icons.sports),
+          title: TextBurgerMenu(
+            text: 'Abstreuplan',
+          ),
+          onTap: () {
+            Navigator.pop(context);
+          },
         ),
         ListTile(
           leading: const Icon(Icons.library_music),
@@ -194,8 +289,14 @@ class NavigationDrawer extends StatelessWidget {
             Navigator.pop(context);
           },
         ),
-        const Divider(
-          color: Colors.black54,
+        ListTile(
+          leading: const Icon(Icons.contact_mail),
+          title: TextBurgerMenu(
+            text: 'Liedtexte',
+          ),
+          onTap: () {
+            Navigator.pop(context);
+          },
         ),
         ListTile(
           leading: const Icon(Icons.euro),
@@ -206,9 +307,6 @@ class NavigationDrawer extends StatelessWidget {
             Navigator.pop(context);
           },
         ),
-        const Divider(
-          color: Colors.black54,
-        ),
         ListTile(
           leading: const Icon(Icons.settings),
           title: TextBurgerMenu(
@@ -216,6 +314,16 @@ class NavigationDrawer extends StatelessWidget {
           ),
           onTap: () {
             Navigator.pop(context);
+          },
+        ),
+        ListTile(
+          leading: const Icon(Icons.contact_mail),
+          title: TextBurgerMenu(
+            text: 'Impressum',
+          ),
+          onTap: () {
+            Navigator.pop(context);
+            Navigator.pushNamed(context, ImprintScreen.id);
           },
         ),
         const Divider(
@@ -227,6 +335,7 @@ class NavigationDrawer extends StatelessWidget {
             text: 'Abmelden',
           ),
           onTap: () {
+            Navigator.pop(context);
             AuthenticationService.signOut(context: context);
             Navigator.pushNamed(context, MainScreen.id);
             ScaffoldMessenger.of(context).showSnackBar(

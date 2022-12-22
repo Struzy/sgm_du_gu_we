@@ -22,7 +22,6 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     try {
       _auth.currentUser?.sendEmailVerification();
@@ -74,6 +73,11 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: kSGMColorGreen,
+          title: const Text('Email-Verifikation'),
+          centerTitle: true,
+        ),
         body: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,

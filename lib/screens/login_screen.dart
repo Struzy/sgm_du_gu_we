@@ -24,6 +24,7 @@ class LoginScreenState extends State<LoginScreen> {
       appBar: AppBar(
         backgroundColor: kSGMColorGreen,
         title: Text('Anmeldung'),
+        centerTitle: true,
       ),
       body: ModalProgressHUD(
         color: kSGMColorGreenLight,
